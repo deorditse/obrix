@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "523655112271",
+    "project_id": "qbrix-cdfb1",
+    "storage_bucket": "qbrix-cdfb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523655112271:android:5c953c9e39269be7bf2c3a",
+        "android_client_info": {
+          "package_name": "com.example.obrix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByhfU_6jvjTVT89ODql-mqhGbRHzTa030"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
