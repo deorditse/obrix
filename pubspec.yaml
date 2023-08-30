@@ -8,7 +8,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0-290.3.beta <4.0.0'
+  sdk: '>=3.1.0-262.2.beta <4.0.0'
+
 
 
 dependencies:
@@ -29,16 +30,18 @@ dependencies:
   image_picker: ^0.8.6
   intl: ^0.17.0 #для перевода текста / локаль / DateFormat
   flutter_native_splash: ^2.2.17
-  image_cropper: ^4.0.1
   dotted_border: ^2.0.0+3
-  image_cropper_for_web: ^2.0.0
+  image_cropper_for_web:
+  image_cropper:
   pdf: ^3.10.4
   firebase_core: ^2.10.0
-
+  open_file: ^3.3.2
+  path_provider: ^2.1.0
+  printing: ^5.11.0
+  image:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
   flutter_lints: ^2.0.0
 
@@ -53,6 +56,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/images/
+    - assets/generate-pdf/
 
 
   uses-material-design: true

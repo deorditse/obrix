@@ -1,1 +1,1 @@
-export 'src/home_page_bloc/home_page_bloc.dart';
+export 'src/qbrix_bloc/qbrix_bloc.dart';

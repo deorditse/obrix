@@ -23,7 +23,7 @@ class WrapperSceletonPage extends StatelessWidget {
           "QBRIX",
           style: myTextStyleFontOswald(
             fontSize: 24,
-            textColor: ColorStyles.white,
+            context: context,
           ),
         ),
       ),
@@ -45,5 +45,3 @@ class WrapperSceletonPage extends StatelessWidget {
     );
   }
 }
-
-

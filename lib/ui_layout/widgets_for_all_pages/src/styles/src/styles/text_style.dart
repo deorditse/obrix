@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obrix/ui_layout/widgets_for_all_pages/src/styles/styles.dart';
 
 // const String SBSansTextRegularPath =
 //     "packages/common_solutions_for_different_services/assets_for_all_services/fonts/SBSansText/OT_TTF/SBSansTextRegular.ttf";
@@ -36,13 +37,13 @@ TextStyle myTextStyleFontOswald({
   TextDecoration? decoration,
   FontWeight? newFontWeight,
   FontFamilyName newFontFamilyName = FontFamilyName.SBSansTextRegular,
+  required BuildContext context,
 }) {
   return TextStyle(
-    color: textColor ?? const Color(0xFF2C2E33),
+    color: textColor ?? Theme.of(context).textTheme.titleLarge!.color!,
     fontFamily: _getPathFont(fontFamilyName: newFontFamilyName),
-    fontSize: fontSize ?? 12,
-    fontWeight: newFontWeight ?? FontWeight.w600,
-    fontStyle: FontStyle.normal,
+    fontSize: fontSize ?? Theme.of(context).textTheme.bodyMedium!.fontSize,
+    fontWeight: newFontWeight ?? FontWeight.w400,
     decoration: decoration,
     // overflow: TextOverflow.ellipsis,
   );

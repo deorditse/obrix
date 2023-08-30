@@ -4,8 +4,9 @@ version: 0.0.1
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.0.0-290.3.beta <4.0.0'
+  sdk: '>=3.1.0-262.2.beta <4.0.0'
   flutter: ">=1.17.0"
+
 
 dependencies:
 
@@ -13,6 +14,9 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
+  universal_html:
+  image:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

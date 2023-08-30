@@ -21,9 +21,15 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -53,22 +59,5 @@ class DefaultFirebaseOptions {
     projectId: 'qbrix-cdfb1',
     authDomain: 'qbrix-cdfb1.firebaseapp.com',
     storageBucket: 'qbrix-cdfb1.appspot.com',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyByhfU_6jvjTVT89ODql-mqhGbRHzTa030',
-    appId: '1:523655112271:android:5c953c9e39269be7bf2c3a',
-    messagingSenderId: '523655112271',
-    projectId: 'qbrix-cdfb1',
-    storageBucket: 'qbrix-cdfb1.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAFshGxwk1i368qChjrNb2CdFTCq9bOmto',
-    appId: '1:523655112271:ios:a621709268afa1eabf2c3a',
-    messagingSenderId: '523655112271',
-    projectId: 'qbrix-cdfb1',
-    storageBucket: 'qbrix-cdfb1.appspot.com',
-    iosBundleId: 'com.example.obrix',
   );
 }
