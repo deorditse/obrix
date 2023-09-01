@@ -41,34 +41,47 @@ class QbrixBloc extends Bloc<QbrixEvent, QbrixState> {
 
     emit(state.copyWith(isLoading: true));
 
-    late int countPixelsColumn;
-    late int countPixelsRow;
-    late int countSegmentsRow;
-    late int countSegmentsColumn;
+    late int segmentWidth;
+    late int segmentHeight;
+    late int countSegmentsInRow;
+    late int countSegmentsInColumn;
+    late Size _sizePixel;
 
-    ///для формата A3
+    final Uint8List _bytes = await readAsBytes;
+    img.Image image = img.grayscale(img.decodeImage(_bytes)!);
+
+    //А4 состоит из 81 сегмента (шириной 19 и высотой 13).
+    // Итого ширина: 9*9 = 81
+    // высота 9*13 = 117
+
+    // Привет. А3 состоит из 117 сегментов (шириной 13 и высотой 12), и еще 9 сегментов (шириной 13 и 10 высотой).
+    //
+    // Итого ширина: 9*13 = 117
+    // высота 13*12 + 10 = 166
     switch (state.splitImageModel.formatImage) {
       case FormatImage.a4:
-        countPixelsColumn = 117;
-        countPixelsRow = 81;
-        countSegmentsRow = 9;
-        countSegmentsColumn = 13;
+        segmentWidth = 9;
+        segmentHeight = 13;
+        countSegmentsInRow = 9;
+        countSegmentsInColumn = 9;
+        _sizePixel = Size(
+          image.width / (segmentWidth * countSegmentsInRow),
+          image.height / (segmentHeight * countSegmentsInColumn),
+        );
       case FormatImage.a3:
       default:
-        countPixelsColumn = 166;
-        countPixelsRow = 117;
-        countSegmentsRow = 9;
-        countSegmentsColumn = 14;
+        segmentWidth = 13;
+        segmentHeight = 12;
+        countSegmentsInRow = 9;
+        countSegmentsInColumn = 14;
+        // для нижних сегментов countPixelsInSegmentColumn = 10;
+        _sizePixel = Size(
+          image.width / (segmentWidth * countSegmentsInRow),
+          image.height / (segmentHeight * countSegmentsInColumn - 3),
+        );
     }
-    final Uint8List _bytes = await readAsBytes;
 
-    img.Image image = img.grayscale(img.decodeImage(_bytes)!);
-    // img.Image image = img.decodeImage(_bytes)!;
-
-    Size _sizePixel =
-        Size(image.width / countPixelsRow, image.height / countPixelsColumn);
-
-    Map<int, List<Color>> pixelsImageInGrey = {};
+    Map<int, List<Color>> _pixelsImageInGrey = {};
 
     ///1 Нарезаю картинку на пиксели
     int indexRow = 0;
@@ -88,43 +101,34 @@ class QbrixBloc extends Bloc<QbrixEvent, QbrixState> {
         rowListColor.add(valueColor);
       }
 
-      pixelsImageInGrey[indexRow] = rowListColor;
+      _pixelsImageInGrey[indexRow] = rowListColor;
       indexRow += 1;
     }
 
-    //А4 состоит из 81 сегмента (шириной 19 и высотой 13).
-    // Итого ширина: 9*9 = 81
-    // высота 9*13 = 117
-
-    // Привет. А3 состоит из 117 сегментов (шириной 13 и высотой 12), и еще 9 сегментов (шириной 13 и 10 высотой).
-    //
-    // Итого ширина: 9*13 = 117
-    // высота 13*12 + 10 = 166
-
-    ///indexSegment : indexRowSegment : List pixels color hex
-    // Map<int, Map<int, List<String>>>
-    //     indexSegmentToIndexRowSegmentAndListPixelsColorHex = {};
-    //
-    // img.Image image = img.grayscale(img.decodeImage(_bytes)!);
-
-    // ///проходимся по всем сегментам
-    // for (int indexSegmentRow = 1;
-    //     indexSegmentRow <= countSegmentsRow;
-    //     indexSegmentRow++) {
-    //   for (int indexSegmentRow = 1;
-    //       indexSegmentRow <= countSegmentsRow;
-    //       indexSegmentRow++) {
-    //     /// проход по сегментам
-    //   }
-    // }
+    ///делю нарезанные пиксели на сегменты
+    ///indexSegment : indexRowSegment : List pixels color HEX
+    Map<int, Map<int, List<Color>>>
+        indexSegmentToIndexRowSegmentAndListPixelsColorHex = {};
+    int segmentIndex = 0;
+    for (int rowIndex = 0;
+        rowIndex < _pixelsImageInGrey.length;
+        rowIndex += segmentHeight) {
+      Map<int, List<Color>> segmentRows = {};
+      for (int i = rowIndex; i < rowIndex + segmentHeight; i++) {
+        segmentRows[i - rowIndex] = _pixelsImageInGrey[i] ?? [];
+      }
+      indexSegmentToIndexRowSegmentAndListPixelsColorHex[segmentIndex] =
+          segmentRows;
+      segmentIndex++;
+    }
 
     emit(
       state.copyWith(
         isLoading: false,
         splitImageModel: state.splitImageModel.copyWith(
-          mapRowIndexAndListColor: pixelsImageInGrey,
-          squareCountInRow: countSegmentsColumn,
-          squareCountInColumn: countPixelsColumn,
+          mapRowIndexAndListColor: _pixelsImageInGrey,
+          indexSegmentToIndexRowSegmentAndListPixelsColorHex:
+              indexSegmentToIndexRowSegmentAndListPixelsColorHex,
           sizePixel: _sizePixel,
           sizeImage: Size(image.width.toDouble(), image.height.toDouble()),
         ),
