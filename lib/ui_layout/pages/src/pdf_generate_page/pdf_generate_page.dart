@@ -8,7 +8,6 @@ import 'package:obrix/ui_layout/pages/pages.dart';
 import 'package:obrix/ui_layout/widgets_for_all_pages/widgets_for_all_pages.dart';
 
 import 'widgets/app.dart';
-import 'widgets/generate_pdf.dart';
 
 class PdfGeneratePage extends StatelessWidget {
   static const String id = '/pdf_generate_page';
@@ -19,7 +18,7 @@ class PdfGeneratePage extends StatelessWidget {
       {required Future<Uint8List> readAsBytes}) {
     Future.delayed(const Duration(milliseconds: 300), () {
       BlocProvider.of<QbrixBloc>(context).add(
-        QbrixEvent.splitImageInPixeles(readAsBytes: readAsBytes),
+        QbrixEvent.splitImageInPixelsNew(readAsBytes: readAsBytes),
       );
     });
   }
@@ -47,7 +46,6 @@ class PdfGeneratePage extends StatelessWidget {
               );
             } else {
               return state.splitImageModel.mapRowIndexAndListColor.isNotEmpty
-                  // ? GeneratePdf(splitImageModel: state.splitImageModel)
                   ? MyApp(splitImageModel: state.splitImageModel)
                   : const Text("Ошибка...");
             }

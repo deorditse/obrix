@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:io'; //delete for add new model File
@@ -17,12 +18,13 @@ enum FormatImage {
 @freezed
 class SplitImageModel with _$SplitImageModel {
   const factory SplitImageModel({
-    @Default({}) Map<int, List<Color>> mapRowIndexAndListColor,
+    @Default({}) Map<int, List<int>> mapRowIndexAndListColor,
+    @Default({}) Map<int, List<Uint8List>> indexColumnAndSegmentsImage,
     @Default({})
-    Map<int, Map<int, List<Color>>>
-        indexSegmentToIndexRowSegmentAndListPixelsColorHex,
+    Map<int, List<Map<int, List<int>>>> indexColumnAndSegmentsInRowInPixels,
+    @Default(9) kSegmentsWidth,
+    @Default(13) kSegmentsHeight,
     FormatImage? formatImage,
     Size? sizePixel,
-    @Default(Size(400, 400)) Size sizeImage,
   }) = _SplitImageModelRes;
 }

@@ -2,10 +2,15 @@ part of 'qbrix_bloc.dart';
 
 @freezed
 class QbrixEvent with _$QbrixEvent {
+  //
+  // const factory QbrixEvent.splitImageInPixeles({
+  //   required Future<Uint8List> readAsBytes,
+  // }) = _SplitImageInPixelesQbrixEventc;
 
-  const factory QbrixEvent.splitImageInPixeles({
+
+  const factory QbrixEvent.splitImageInPixelsNew({
     required Future<Uint8List> readAsBytes,
-  }) = _SplitImageInPixelesQbrixEventc;
+  }) = _SplitImageInPixelesNewQbrixEventc;
 
   const factory QbrixEvent.clearAll() = _ClearAllQbrixEvent;
 

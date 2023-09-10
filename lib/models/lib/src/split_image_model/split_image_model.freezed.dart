@@ -16,14 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SplitImageModel {
-  Map<int, List<Color>> get mapRowIndexAndListColor =>
+  Map<int, List<int>> get mapRowIndexAndListColor =>
       throw _privateConstructorUsedError;
-  Map<int, Map<int, List<Color>>>
-      get indexSegmentToIndexRowSegmentAndListPixelsColorHex =>
-          throw _privateConstructorUsedError;
+  Map<int, List<Uint8List>> get indexColumnAndSegmentsImage =>
+      throw _privateConstructorUsedError;
+  Map<int, List<Map<int, List<int>>>> get indexColumnAndSegmentsInRowInPixels =>
+      throw _privateConstructorUsedError;
+  dynamic get kSegmentsWidth => throw _privateConstructorUsedError;
+  dynamic get kSegmentsHeight => throw _privateConstructorUsedError;
   FormatImage? get formatImage => throw _privateConstructorUsedError;
   Size? get sizePixel => throw _privateConstructorUsedError;
-  Size get sizeImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SplitImageModelCopyWith<SplitImageModel> get copyWith =>
@@ -37,12 +39,13 @@ abstract class $SplitImageModelCopyWith<$Res> {
       _$SplitImageModelCopyWithImpl<$Res, SplitImageModel>;
   @useResult
   $Res call(
-      {Map<int, List<Color>> mapRowIndexAndListColor,
-      Map<int, Map<int, List<Color>>>
-          indexSegmentToIndexRowSegmentAndListPixelsColorHex,
+      {Map<int, List<int>> mapRowIndexAndListColor,
+      Map<int, List<Uint8List>> indexColumnAndSegmentsImage,
+      Map<int, List<Map<int, List<int>>>> indexColumnAndSegmentsInRowInPixels,
+      dynamic kSegmentsWidth,
+      dynamic kSegmentsHeight,
       FormatImage? formatImage,
-      Size? sizePixel,
-      Size sizeImage});
+      Size? sizePixel});
 }
 
 /// @nodoc
@@ -59,21 +62,35 @@ class _$SplitImageModelCopyWithImpl<$Res, $Val extends SplitImageModel>
   @override
   $Res call({
     Object? mapRowIndexAndListColor = null,
-    Object? indexSegmentToIndexRowSegmentAndListPixelsColorHex = null,
+    Object? indexColumnAndSegmentsImage = null,
+    Object? indexColumnAndSegmentsInRowInPixels = null,
+    Object? kSegmentsWidth = freezed,
+    Object? kSegmentsHeight = freezed,
     Object? formatImage = freezed,
     Object? sizePixel = freezed,
-    Object? sizeImage = null,
   }) {
     return _then(_value.copyWith(
       mapRowIndexAndListColor: null == mapRowIndexAndListColor
           ? _value.mapRowIndexAndListColor
           : mapRowIndexAndListColor // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Color>>,
-      indexSegmentToIndexRowSegmentAndListPixelsColorHex: null ==
-              indexSegmentToIndexRowSegmentAndListPixelsColorHex
-          ? _value.indexSegmentToIndexRowSegmentAndListPixelsColorHex
-          : indexSegmentToIndexRowSegmentAndListPixelsColorHex // ignore: cast_nullable_to_non_nullable
-              as Map<int, Map<int, List<Color>>>,
+              as Map<int, List<int>>,
+      indexColumnAndSegmentsImage: null == indexColumnAndSegmentsImage
+          ? _value.indexColumnAndSegmentsImage
+          : indexColumnAndSegmentsImage // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Uint8List>>,
+      indexColumnAndSegmentsInRowInPixels: null ==
+              indexColumnAndSegmentsInRowInPixels
+          ? _value.indexColumnAndSegmentsInRowInPixels
+          : indexColumnAndSegmentsInRowInPixels // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Map<int, List<int>>>>,
+      kSegmentsWidth: freezed == kSegmentsWidth
+          ? _value.kSegmentsWidth
+          : kSegmentsWidth // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      kSegmentsHeight: freezed == kSegmentsHeight
+          ? _value.kSegmentsHeight
+          : kSegmentsHeight // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       formatImage: freezed == formatImage
           ? _value.formatImage
           : formatImage // ignore: cast_nullable_to_non_nullable
@@ -82,10 +99,6 @@ class _$SplitImageModelCopyWithImpl<$Res, $Val extends SplitImageModel>
           ? _value.sizePixel
           : sizePixel // ignore: cast_nullable_to_non_nullable
               as Size?,
-      sizeImage: null == sizeImage
-          ? _value.sizeImage
-          : sizeImage // ignore: cast_nullable_to_non_nullable
-              as Size,
     ) as $Val);
   }
 }
@@ -99,12 +112,13 @@ abstract class _$$_SplitImageModelResCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<int, List<Color>> mapRowIndexAndListColor,
-      Map<int, Map<int, List<Color>>>
-          indexSegmentToIndexRowSegmentAndListPixelsColorHex,
+      {Map<int, List<int>> mapRowIndexAndListColor,
+      Map<int, List<Uint8List>> indexColumnAndSegmentsImage,
+      Map<int, List<Map<int, List<int>>>> indexColumnAndSegmentsInRowInPixels,
+      dynamic kSegmentsWidth,
+      dynamic kSegmentsHeight,
       FormatImage? formatImage,
-      Size? sizePixel,
-      Size sizeImage});
+      Size? sizePixel});
 }
 
 /// @nodoc
@@ -119,21 +133,32 @@ class __$$_SplitImageModelResCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mapRowIndexAndListColor = null,
-    Object? indexSegmentToIndexRowSegmentAndListPixelsColorHex = null,
+    Object? indexColumnAndSegmentsImage = null,
+    Object? indexColumnAndSegmentsInRowInPixels = null,
+    Object? kSegmentsWidth = freezed,
+    Object? kSegmentsHeight = freezed,
     Object? formatImage = freezed,
     Object? sizePixel = freezed,
-    Object? sizeImage = null,
   }) {
     return _then(_$_SplitImageModelRes(
       mapRowIndexAndListColor: null == mapRowIndexAndListColor
           ? _value._mapRowIndexAndListColor
           : mapRowIndexAndListColor // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Color>>,
-      indexSegmentToIndexRowSegmentAndListPixelsColorHex: null ==
-              indexSegmentToIndexRowSegmentAndListPixelsColorHex
-          ? _value._indexSegmentToIndexRowSegmentAndListPixelsColorHex
-          : indexSegmentToIndexRowSegmentAndListPixelsColorHex // ignore: cast_nullable_to_non_nullable
-              as Map<int, Map<int, List<Color>>>,
+              as Map<int, List<int>>,
+      indexColumnAndSegmentsImage: null == indexColumnAndSegmentsImage
+          ? _value._indexColumnAndSegmentsImage
+          : indexColumnAndSegmentsImage // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Uint8List>>,
+      indexColumnAndSegmentsInRowInPixels: null ==
+              indexColumnAndSegmentsInRowInPixels
+          ? _value._indexColumnAndSegmentsInRowInPixels
+          : indexColumnAndSegmentsInRowInPixels // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Map<int, List<int>>>>,
+      kSegmentsWidth:
+          freezed == kSegmentsWidth ? _value.kSegmentsWidth! : kSegmentsWidth,
+      kSegmentsHeight: freezed == kSegmentsHeight
+          ? _value.kSegmentsHeight!
+          : kSegmentsHeight,
       formatImage: freezed == formatImage
           ? _value.formatImage
           : formatImage // ignore: cast_nullable_to_non_nullable
@@ -142,63 +167,91 @@ class __$$_SplitImageModelResCopyWithImpl<$Res>
           ? _value.sizePixel
           : sizePixel // ignore: cast_nullable_to_non_nullable
               as Size?,
-      sizeImage: null == sizeImage
-          ? _value.sizeImage
-          : sizeImage // ignore: cast_nullable_to_non_nullable
-              as Size,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SplitImageModelRes implements _SplitImageModelRes {
+class _$_SplitImageModelRes
+    with DiagnosticableTreeMixin
+    implements _SplitImageModelRes {
   const _$_SplitImageModelRes(
-      {final Map<int, List<Color>> mapRowIndexAndListColor = const {},
-      final Map<int, Map<int, List<Color>>>
-          indexSegmentToIndexRowSegmentAndListPixelsColorHex = const {},
+      {final Map<int, List<int>> mapRowIndexAndListColor = const {},
+      final Map<int, List<Uint8List>> indexColumnAndSegmentsImage = const {},
+      final Map<int, List<Map<int, List<int>>>>
+          indexColumnAndSegmentsInRowInPixels = const {},
+      this.kSegmentsWidth = 9,
+      this.kSegmentsHeight = 13,
       this.formatImage,
-      this.sizePixel,
-      this.sizeImage = const Size(400, 400)})
+      this.sizePixel})
       : _mapRowIndexAndListColor = mapRowIndexAndListColor,
-        _indexSegmentToIndexRowSegmentAndListPixelsColorHex =
-            indexSegmentToIndexRowSegmentAndListPixelsColorHex;
+        _indexColumnAndSegmentsImage = indexColumnAndSegmentsImage,
+        _indexColumnAndSegmentsInRowInPixels =
+            indexColumnAndSegmentsInRowInPixels;
 
-  final Map<int, List<Color>> _mapRowIndexAndListColor;
+  final Map<int, List<int>> _mapRowIndexAndListColor;
   @override
   @JsonKey()
-  Map<int, List<Color>> get mapRowIndexAndListColor {
+  Map<int, List<int>> get mapRowIndexAndListColor {
     if (_mapRowIndexAndListColor is EqualUnmodifiableMapView)
       return _mapRowIndexAndListColor;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_mapRowIndexAndListColor);
   }
 
-  final Map<int, Map<int, List<Color>>>
-      _indexSegmentToIndexRowSegmentAndListPixelsColorHex;
+  final Map<int, List<Uint8List>> _indexColumnAndSegmentsImage;
   @override
   @JsonKey()
-  Map<int, Map<int, List<Color>>>
-      get indexSegmentToIndexRowSegmentAndListPixelsColorHex {
-    if (_indexSegmentToIndexRowSegmentAndListPixelsColorHex
-        is EqualUnmodifiableMapView)
-      return _indexSegmentToIndexRowSegmentAndListPixelsColorHex;
+  Map<int, List<Uint8List>> get indexColumnAndSegmentsImage {
+    if (_indexColumnAndSegmentsImage is EqualUnmodifiableMapView)
+      return _indexColumnAndSegmentsImage;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(
-        _indexSegmentToIndexRowSegmentAndListPixelsColorHex);
+    return EqualUnmodifiableMapView(_indexColumnAndSegmentsImage);
   }
 
+  final Map<int, List<Map<int, List<int>>>>
+      _indexColumnAndSegmentsInRowInPixels;
+  @override
+  @JsonKey()
+  Map<int, List<Map<int, List<int>>>> get indexColumnAndSegmentsInRowInPixels {
+    if (_indexColumnAndSegmentsInRowInPixels is EqualUnmodifiableMapView)
+      return _indexColumnAndSegmentsInRowInPixels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_indexColumnAndSegmentsInRowInPixels);
+  }
+
+  @override
+  @JsonKey()
+  final dynamic kSegmentsWidth;
+  @override
+  @JsonKey()
+  final dynamic kSegmentsHeight;
   @override
   final FormatImage? formatImage;
   @override
   final Size? sizePixel;
-  @override
-  @JsonKey()
-  final Size sizeImage;
 
   @override
-  String toString() {
-    return 'SplitImageModel(mapRowIndexAndListColor: $mapRowIndexAndListColor, indexSegmentToIndexRowSegmentAndListPixelsColorHex: $indexSegmentToIndexRowSegmentAndListPixelsColorHex, formatImage: $formatImage, sizePixel: $sizePixel, sizeImage: $sizeImage)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplitImageModel(mapRowIndexAndListColor: $mapRowIndexAndListColor, indexColumnAndSegmentsImage: $indexColumnAndSegmentsImage, indexColumnAndSegmentsInRowInPixels: $indexColumnAndSegmentsInRowInPixels, kSegmentsWidth: $kSegmentsWidth, kSegmentsHeight: $kSegmentsHeight, formatImage: $formatImage, sizePixel: $sizePixel)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SplitImageModel'))
+      ..add(DiagnosticsProperty(
+          'mapRowIndexAndListColor', mapRowIndexAndListColor))
+      ..add(DiagnosticsProperty(
+          'indexColumnAndSegmentsImage', indexColumnAndSegmentsImage))
+      ..add(DiagnosticsProperty('indexColumnAndSegmentsInRowInPixels',
+          indexColumnAndSegmentsInRowInPixels))
+      ..add(DiagnosticsProperty('kSegmentsWidth', kSegmentsWidth))
+      ..add(DiagnosticsProperty('kSegmentsHeight', kSegmentsHeight))
+      ..add(DiagnosticsProperty('formatImage', formatImage))
+      ..add(DiagnosticsProperty('sizePixel', sizePixel));
   }
 
   @override
@@ -209,25 +262,31 @@ class _$_SplitImageModelRes implements _SplitImageModelRes {
             const DeepCollectionEquality().equals(
                 other._mapRowIndexAndListColor, _mapRowIndexAndListColor) &&
             const DeepCollectionEquality().equals(
-                other._indexSegmentToIndexRowSegmentAndListPixelsColorHex,
-                _indexSegmentToIndexRowSegmentAndListPixelsColorHex) &&
+                other._indexColumnAndSegmentsImage,
+                _indexColumnAndSegmentsImage) &&
+            const DeepCollectionEquality().equals(
+                other._indexColumnAndSegmentsInRowInPixels,
+                _indexColumnAndSegmentsInRowInPixels) &&
+            const DeepCollectionEquality()
+                .equals(other.kSegmentsWidth, kSegmentsWidth) &&
+            const DeepCollectionEquality()
+                .equals(other.kSegmentsHeight, kSegmentsHeight) &&
             (identical(other.formatImage, formatImage) ||
                 other.formatImage == formatImage) &&
             (identical(other.sizePixel, sizePixel) ||
-                other.sizePixel == sizePixel) &&
-            (identical(other.sizeImage, sizeImage) ||
-                other.sizeImage == sizeImage));
+                other.sizePixel == sizePixel));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_mapRowIndexAndListColor),
-      const DeepCollectionEquality()
-          .hash(_indexSegmentToIndexRowSegmentAndListPixelsColorHex),
+      const DeepCollectionEquality().hash(_indexColumnAndSegmentsImage),
+      const DeepCollectionEquality().hash(_indexColumnAndSegmentsInRowInPixels),
+      const DeepCollectionEquality().hash(kSegmentsWidth),
+      const DeepCollectionEquality().hash(kSegmentsHeight),
       formatImage,
-      sizePixel,
-      sizeImage);
+      sizePixel);
 
   @JsonKey(ignore: true)
   @override
@@ -239,24 +298,29 @@ class _$_SplitImageModelRes implements _SplitImageModelRes {
 
 abstract class _SplitImageModelRes implements SplitImageModel {
   const factory _SplitImageModelRes(
-      {final Map<int, List<Color>> mapRowIndexAndListColor,
-      final Map<int, Map<int, List<Color>>>
-          indexSegmentToIndexRowSegmentAndListPixelsColorHex,
+      {final Map<int, List<int>> mapRowIndexAndListColor,
+      final Map<int, List<Uint8List>> indexColumnAndSegmentsImage,
+      final Map<int, List<Map<int, List<int>>>>
+          indexColumnAndSegmentsInRowInPixels,
+      final dynamic kSegmentsWidth,
+      final dynamic kSegmentsHeight,
       final FormatImage? formatImage,
-      final Size? sizePixel,
-      final Size sizeImage}) = _$_SplitImageModelRes;
+      final Size? sizePixel}) = _$_SplitImageModelRes;
 
   @override
-  Map<int, List<Color>> get mapRowIndexAndListColor;
+  Map<int, List<int>> get mapRowIndexAndListColor;
   @override
-  Map<int, Map<int, List<Color>>>
-      get indexSegmentToIndexRowSegmentAndListPixelsColorHex;
+  Map<int, List<Uint8List>> get indexColumnAndSegmentsImage;
+  @override
+  Map<int, List<Map<int, List<int>>>> get indexColumnAndSegmentsInRowInPixels;
+  @override
+  dynamic get kSegmentsWidth;
+  @override
+  dynamic get kSegmentsHeight;
   @override
   FormatImage? get formatImage;
   @override
   Size? get sizePixel;
-  @override
-  Size get sizeImage;
   @override
   @JsonKey(ignore: true)
   _$$_SplitImageModelResCopyWith<_$_SplitImageModelRes> get copyWith =>

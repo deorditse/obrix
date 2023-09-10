@@ -1,15 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper_for_web/image_cropper_for_web.dart';
-import 'package:logger/logger.dart';
 import 'package:models/models.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'dart:ui' as ui;
 
 part 'qbrix_event.dart';
 
@@ -24,116 +22,185 @@ class QbrixBloc extends Bloc<QbrixEvent, QbrixState> {
     on<QbrixEvent>(
       (QbrixEvent event, _) {
         event.when<void>(
-          splitImageInPixeles: _splitImageInPixeles,
+          // splitImageInPixeles: _splitImageInPixeles,
           clearAll: _clearAll,
           pickNewImagePath: _pickNewImagePath,
           addCroppedImage: _addCroppedImage,
           selectCropFormat: _selectCropFormat,
+          splitImageInPixelsNew: _splitImageInPixelsNew,
         );
       },
     );
   }
 
-  Future<void> _splitImageInPixeles(
-    Future<Uint8List> readAsBytes,
-  ) async {
-    log("qbrix_bloc _splitImageInPixeles");
+  Future<void> _splitImageInPixelsNew(Future<Uint8List> readAsBytes) async {
+    try {
+      log("qbrix_bloc _splitImageInPixeles");
 
-    emit(state.copyWith(isLoading: true));
+      emit(state.copyWith(isLoading: true));
 
-    late int segmentWidth;
-    late int segmentHeight;
-    late int countSegmentsInRow;
-    late int countSegmentsInColumn;
-    late Size _sizePixel;
+      late int kSegmentsWidth;
+      late int kSegmentsHeight;
+      late int countSegmentsInRow;
+      late int countSegmentsInColumn;
+      late material.Size _sizePixel;
 
-    final Uint8List _bytes = await readAsBytes;
-    img.Image image = img.grayscale(img.decodeImage(_bytes)!);
+      final Uint8List _bytes = await readAsBytes;
+      img.Image image = img.grayscale(img.decodeImage(_bytes)!);
 
-    //А4 состоит из 81 сегмента (шириной 19 и высотой 13).
-    // Итого ширина: 9*9 = 81
-    // высота 9*13 = 117
+      //А4 состоит из 81 сегмента (шириной 9 и высотой 13).
+      // Итого ширина: 9*9 = 81
+      // высота 9*13 = 117
 
-    // Привет. А3 состоит из 117 сегментов (шириной 13 и высотой 12), и еще 9 сегментов (шириной 13 и 10 высотой).
-    //
-    // Итого ширина: 9*13 = 117
-    // высота 13*12 + 10 = 166
-    switch (state.splitImageModel.formatImage) {
-      case FormatImage.a4:
-        segmentWidth = 9;
-        segmentHeight = 13;
-        countSegmentsInRow = 9;
-        countSegmentsInColumn = 9;
-        _sizePixel = Size(
-          image.width / (segmentWidth * countSegmentsInRow),
-          image.height / (segmentHeight * countSegmentsInColumn),
-        );
-      case FormatImage.a3:
-      default:
-        segmentWidth = 13;
-        segmentHeight = 12;
-        countSegmentsInRow = 9;
-        countSegmentsInColumn = 14;
-        // для нижних сегментов countPixelsInSegmentColumn = 10;
-        _sizePixel = Size(
-          image.width / (segmentWidth * countSegmentsInRow),
-          image.height / (segmentHeight * countSegmentsInColumn - 3),
-        );
+      // Привет. А3 состоит из 117 сегментов (шириной 13 и высотой 12), и еще 9 сегментов (шириной 13 и 10 высотой).
+      //
+      // Итого ширина: 9*13 = 117
+      // высота 13*12 + 10 = 166
+      switch (state.splitImageModel.formatImage) {
+        case FormatImage.a4:
+          kSegmentsWidth = 9;
+          kSegmentsHeight = 13;
+          countSegmentsInRow = 9;
+          countSegmentsInColumn = 9;
+          _sizePixel = material.Size(
+            (image.width).toInt() / (kSegmentsWidth * countSegmentsInRow),
+            (image.height).toInt() / (kSegmentsHeight * countSegmentsInColumn),
+          );
+        case FormatImage.a3:
+        default:
+          kSegmentsWidth = 13;
+          kSegmentsHeight = 12;
+          countSegmentsInRow = 9;
+          countSegmentsInColumn = 14;
+          // для нижних сегментов countPixelsInSegmentColumn = 10;
+          _sizePixel = material.Size(
+            (image.width).toInt() / (kSegmentsWidth * countSegmentsInRow),
+            (image.height).toInt() /
+                (kSegmentsHeight * (countSegmentsInColumn - 3)),
+          );
+      }
+
+      ////_______________________________________________________________________________________________
+      //// Все пиксели картинки
+      ////_______________________________________________________________________________________________
+
+      //индекс строки и пиксели в этой строке
+      Map<int, List<int>> _pixelsImageInGrey = await _generatePixelsSegment(
+        image: image,
+        sizePixel: _sizePixel,
+      );
+
+      ////_______________________________________________________________________________________________
+      //// Разбиение на сегменты
+      ////_______________________________________________________________________________________________
+
+      double heightSegment = image.height / countSegmentsInColumn;
+      double widthSegment = image.width / countSegmentsInRow;
+
+      Map<int, List<Uint8List>> indexColumnAndSegmentsImage = {};
+
+      Map<int, List<Map<int, List<int>>>>
+          indexColumnAndSegmentsInRowInPixelsIntColor = {};
+
+      int indexColumn = 0;
+      for (double y = 0; y < image.height; y += heightSegment) {
+        for (double x = 0; (x < image.width); x += widthSegment) {
+          img.Image _segmentImage = img.copyCrop(
+            image,
+            x: x.toInt(),
+            y: y.toInt(),
+            width: widthSegment.toInt(),
+            height: heightSegment.toInt(),
+          );
+
+          Uint8List segmentImageBytes = img.encodeJpg(_segmentImage);
+
+          //индекс строки и пиксели в этой строке
+          Map<int, List<int>> _pixelsImageInGrey = await _generatePixelsSegment(
+            image: _segmentImage,
+            sizePixel: _sizePixel,
+          );
+
+          if (indexColumnAndSegmentsImage[indexColumn] == null ||
+              indexColumnAndSegmentsImage[indexColumn]!.isEmpty) {
+            indexColumnAndSegmentsImage[indexColumn] = [segmentImageBytes];
+          } else {
+            indexColumnAndSegmentsImage[indexColumn] = [
+              ...indexColumnAndSegmentsImage[indexColumn]!,
+              segmentImageBytes,
+            ];
+          }
+
+          if (indexColumnAndSegmentsInRowInPixelsIntColor[indexColumn] ==
+                  null ||
+              indexColumnAndSegmentsInRowInPixelsIntColor[indexColumn]!
+                  .isEmpty) {
+            indexColumnAndSegmentsInRowInPixelsIntColor[indexColumn] = [
+              _pixelsImageInGrey,
+            ];
+          } else {
+            indexColumnAndSegmentsInRowInPixelsIntColor[indexColumn] = [
+              ...indexColumnAndSegmentsInRowInPixelsIntColor[indexColumn]!,
+              _pixelsImageInGrey,
+            ];
+          }
+        }
+        indexColumn += 1;
+      }
+
+      emit(
+        state.copyWith(
+          isLoading: false,
+          splitImageModel: state.splitImageModel.copyWith(
+            mapRowIndexAndListColor: _pixelsImageInGrey,
+            indexColumnAndSegmentsImage: indexColumnAndSegmentsImage,
+            indexColumnAndSegmentsInRowInPixels:
+                indexColumnAndSegmentsInRowInPixelsIntColor,
+            sizePixel: _sizePixel,
+            kSegmentsHeight: kSegmentsHeight,
+            kSegmentsWidth: kSegmentsWidth,
+          ),
+        ),
+      );
+    } catch (e) {
+      print(e);
     }
+  }
 
-    Map<int, List<Color>> _pixelsImageInGrey = {};
+  ////_______________________________________________________________________________________________
+  //// Все пиксели картинки
+  ////_______________________________________________________________________________________________
 
-    ///1 Нарезаю картинку на пиксели
+  Future<Map<int, List<int>>> _generatePixelsSegment({
+    required img.Image image,
+    required material.Size sizePixel,
+  }) async {
+    print(
+        '[qbrix_bloc] _generatePixelsSegment image.height ${image.height} image.width ${image.width}'
+        'sizePixel $sizePixel');
+    Map<int, List<int>> _pixelsImageInGrey = {};
     int indexRow = 0;
-    for (var y = 0; y < image.height; y += _sizePixel.height.toInt()) {
-      List<Color> rowListColor = [];
-      for (var x = 0; (x < image.width); x += _sizePixel.width.toInt()) {
+
+    for (double y = 0; y < image.height; y += sizePixel.height) {
+      List<int> colorPixelsAllImage = [];
+
+      for (double x = 0; (x < image.width); x += sizePixel.width) {
         final img.Image imagePixel = img.copyCrop(
           image,
-          x: x,
-          y: y,
-          width: _sizePixel.width.toInt(),
-          height: _sizePixel.height.toInt(),
+          x: x.toInt(),
+          y: y.toInt(),
+          width: sizePixel.width.toInt(),
+          height: sizePixel.height.toInt(),
         );
 
-        final Color valueColor = await getMainPuzzleColor(image: imagePixel);
-
-        rowListColor.add(valueColor);
+        final int valueColor =
+            (await getMainPuzzleColor(image: imagePixel)).value;
+        colorPixelsAllImage.add(valueColor);
       }
-
-      _pixelsImageInGrey[indexRow] = rowListColor;
+      _pixelsImageInGrey[indexRow] = colorPixelsAllImage;
       indexRow += 1;
     }
-
-    ///делю нарезанные пиксели на сегменты
-    ///indexSegment : indexRowSegment : List pixels color HEX
-    Map<int, Map<int, List<Color>>>
-        indexSegmentToIndexRowSegmentAndListPixelsColorHex = {};
-    int segmentIndex = 0;
-    for (int rowIndex = 0;
-        rowIndex < _pixelsImageInGrey.length;
-        rowIndex += segmentHeight) {
-      Map<int, List<Color>> segmentRows = {};
-      for (int i = rowIndex; i < rowIndex + segmentHeight; i++) {
-        segmentRows[i - rowIndex] = _pixelsImageInGrey[i] ?? [];
-      }
-      indexSegmentToIndexRowSegmentAndListPixelsColorHex[segmentIndex] =
-          segmentRows;
-      segmentIndex++;
-    }
-
-    emit(
-      state.copyWith(
-        isLoading: false,
-        splitImageModel: state.splitImageModel.copyWith(
-          mapRowIndexAndListColor: _pixelsImageInGrey,
-          indexSegmentToIndexRowSegmentAndListPixelsColorHex:
-              indexSegmentToIndexRowSegmentAndListPixelsColorHex,
-          sizePixel: _sizePixel,
-          sizeImage: Size(image.width.toDouble(), image.height.toDouble()),
-        ),
-      ),
-    );
+    return _pixelsImageInGrey;
   }
 
   void _clearAll() {
@@ -168,7 +235,7 @@ class QbrixBloc extends Bloc<QbrixEvent, QbrixState> {
   }
 }
 
-Future<Color> getMainPuzzleColor({required img.Image image}) async {
+Future<material.Color> getMainPuzzleColor({required img.Image image}) async {
   PaletteGenerator _paletteGenerator = await PaletteGenerator.fromByteData(
     EncodedImage(
       image.buffer.asByteData(),
@@ -178,10 +245,10 @@ Future<Color> getMainPuzzleColor({required img.Image image}) async {
     ),
     maximumColorCount: 4,
   );
-  Color dominantColor = _paletteGenerator.dominantColor?.color ??
+  material.Color dominantColor = _paletteGenerator.dominantColor?.color ??
       _paletteGenerator.vibrantColor?.color ??
       _paletteGenerator.mutedColor?.color ??
-      Colors.black;
+      material.Colors.black;
   log("qbrix_bloc getMainPuzzleColor ${dominantColor.toString()}");
 
   // double hue = dominantColor.computeLuminance();

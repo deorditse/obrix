@@ -7,5 +7,6 @@ class QbrixState with _$QbrixState {
     @Default(SplitImageModel()) SplitImageModel splitImageModel,
     String? imagePath,
     CroppedFile? croppedFile,
+    @Default({}) Map<int, List<Uint8List>> indexColumnAndSegmentsImage,
   }) = _QbrixState;
 }

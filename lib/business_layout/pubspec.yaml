@@ -4,7 +4,7 @@ version: 0.0.1
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.1.0-262.2.beta <4.0.0'
+  sdk: '>=3.2.0-42.2.beta <4.0.0'
   flutter: ">=1.17.0"
 
 
@@ -20,9 +20,9 @@ dependencies:
 
   flutter_bloc:
   freezed_annotation:
-  dotted_border: ^2.0.0+3
-  palette_generator: ^0.3.3+2
-  pdf: ^3.10.4
+  dotted_border:
+  palette_generator:
+  pdf:
   image:
   logger: ^1.3.0
   image_cropper_for_web:

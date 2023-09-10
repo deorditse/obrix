@@ -9,7 +9,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:models/models.dart';
-import 'document.dart';
+import 'document/document.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
       body: PdfPreview(
         canChangeOrientation: false,
         canChangePageFormat: false,
-        canDebug: true,
+        canDebug: false,
         shouldRepaint: true,
         maxPageWidth: 700,
         build: (format) => generateDocument(

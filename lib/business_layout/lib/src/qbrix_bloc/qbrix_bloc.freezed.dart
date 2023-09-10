@@ -19,7 +19,7 @@ mixin _$QbrixEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Future<Uint8List> readAsBytes)
-        splitImageInPixeles,
+        splitImageInPixelsNew,
     required TResult Function() clearAll,
     required TResult Function(String imagePath) pickNewImagePath,
     required TResult Function(FormatImage? formatImage) selectCropFormat,
@@ -28,7 +28,7 @@ mixin _$QbrixEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult? Function()? clearAll,
     TResult? Function(String imagePath)? pickNewImagePath,
     TResult? Function(FormatImage? formatImage)? selectCropFormat,
@@ -37,7 +37,7 @@ mixin _$QbrixEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult Function()? clearAll,
     TResult Function(String imagePath)? pickNewImagePath,
     TResult Function(FormatImage? formatImage)? selectCropFormat,
@@ -47,8 +47,8 @@ mixin _$QbrixEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SplitImageInPixelesQbrixEventc value)
-        splitImageInPixeles,
+    required TResult Function(_SplitImageInPixelesNewQbrixEventc value)
+        splitImageInPixelsNew,
     required TResult Function(_ClearAllQbrixEvent value) clearAll,
     required TResult Function(_PickNewImagePathQbrixEvent value)
         pickNewImagePath,
@@ -59,8 +59,8 @@ mixin _$QbrixEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult? Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult? Function(_ClearAllQbrixEvent value)? clearAll,
     TResult? Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult? Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -69,8 +69,8 @@ mixin _$QbrixEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult Function(_ClearAllQbrixEvent value)? clearAll,
     TResult Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -99,22 +99,22 @@ class _$QbrixEventCopyWithImpl<$Res, $Val extends QbrixEvent>
 }
 
 /// @nodoc
-abstract class _$$_SplitImageInPixelesQbrixEventcCopyWith<$Res> {
-  factory _$$_SplitImageInPixelesQbrixEventcCopyWith(
-          _$_SplitImageInPixelesQbrixEventc value,
-          $Res Function(_$_SplitImageInPixelesQbrixEventc) then) =
-      __$$_SplitImageInPixelesQbrixEventcCopyWithImpl<$Res>;
+abstract class _$$_SplitImageInPixelesNewQbrixEventcCopyWith<$Res> {
+  factory _$$_SplitImageInPixelesNewQbrixEventcCopyWith(
+          _$_SplitImageInPixelesNewQbrixEventc value,
+          $Res Function(_$_SplitImageInPixelesNewQbrixEventc) then) =
+      __$$_SplitImageInPixelesNewQbrixEventcCopyWithImpl<$Res>;
   @useResult
   $Res call({Future<Uint8List> readAsBytes});
 }
 
 /// @nodoc
-class __$$_SplitImageInPixelesQbrixEventcCopyWithImpl<$Res>
-    extends _$QbrixEventCopyWithImpl<$Res, _$_SplitImageInPixelesQbrixEventc>
-    implements _$$_SplitImageInPixelesQbrixEventcCopyWith<$Res> {
-  __$$_SplitImageInPixelesQbrixEventcCopyWithImpl(
-      _$_SplitImageInPixelesQbrixEventc _value,
-      $Res Function(_$_SplitImageInPixelesQbrixEventc) _then)
+class __$$_SplitImageInPixelesNewQbrixEventcCopyWithImpl<$Res>
+    extends _$QbrixEventCopyWithImpl<$Res, _$_SplitImageInPixelesNewQbrixEventc>
+    implements _$$_SplitImageInPixelesNewQbrixEventcCopyWith<$Res> {
+  __$$_SplitImageInPixelesNewQbrixEventcCopyWithImpl(
+      _$_SplitImageInPixelesNewQbrixEventc _value,
+      $Res Function(_$_SplitImageInPixelesNewQbrixEventc) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -122,7 +122,7 @@ class __$$_SplitImageInPixelesQbrixEventcCopyWithImpl<$Res>
   $Res call({
     Object? readAsBytes = null,
   }) {
-    return _then(_$_SplitImageInPixelesQbrixEventc(
+    return _then(_$_SplitImageInPixelesNewQbrixEventc(
       readAsBytes: null == readAsBytes
           ? _value.readAsBytes
           : readAsBytes // ignore: cast_nullable_to_non_nullable
@@ -133,23 +133,32 @@ class __$$_SplitImageInPixelesQbrixEventcCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SplitImageInPixelesQbrixEventc
-    implements _SplitImageInPixelesQbrixEventc {
-  const _$_SplitImageInPixelesQbrixEventc({required this.readAsBytes});
+class _$_SplitImageInPixelesNewQbrixEventc
+    with DiagnosticableTreeMixin
+    implements _SplitImageInPixelesNewQbrixEventc {
+  const _$_SplitImageInPixelesNewQbrixEventc({required this.readAsBytes});
 
   @override
   final Future<Uint8List> readAsBytes;
 
   @override
-  String toString() {
-    return 'QbrixEvent.splitImageInPixeles(readAsBytes: $readAsBytes)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'QbrixEvent.splitImageInPixelsNew(readAsBytes: $readAsBytes)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QbrixEvent.splitImageInPixelsNew'))
+      ..add(DiagnosticsProperty('readAsBytes', readAsBytes));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SplitImageInPixelesQbrixEventc &&
+            other is _$_SplitImageInPixelesNewQbrixEventc &&
             (identical(other.readAsBytes, readAsBytes) ||
                 other.readAsBytes == readAsBytes));
   }
@@ -160,47 +169,48 @@ class _$_SplitImageInPixelesQbrixEventc
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SplitImageInPixelesQbrixEventcCopyWith<_$_SplitImageInPixelesQbrixEventc>
-      get copyWith => __$$_SplitImageInPixelesQbrixEventcCopyWithImpl<
-          _$_SplitImageInPixelesQbrixEventc>(this, _$identity);
+  _$$_SplitImageInPixelesNewQbrixEventcCopyWith<
+          _$_SplitImageInPixelesNewQbrixEventc>
+      get copyWith => __$$_SplitImageInPixelesNewQbrixEventcCopyWithImpl<
+          _$_SplitImageInPixelesNewQbrixEventc>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Future<Uint8List> readAsBytes)
-        splitImageInPixeles,
+        splitImageInPixelsNew,
     required TResult Function() clearAll,
     required TResult Function(String imagePath) pickNewImagePath,
     required TResult Function(FormatImage? formatImage) selectCropFormat,
     required TResult Function(CroppedFile croppedFile) addCroppedImage,
   }) {
-    return splitImageInPixeles(readAsBytes);
+    return splitImageInPixelsNew(readAsBytes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult? Function()? clearAll,
     TResult? Function(String imagePath)? pickNewImagePath,
     TResult? Function(FormatImage? formatImage)? selectCropFormat,
     TResult? Function(CroppedFile croppedFile)? addCroppedImage,
   }) {
-    return splitImageInPixeles?.call(readAsBytes);
+    return splitImageInPixelsNew?.call(readAsBytes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult Function()? clearAll,
     TResult Function(String imagePath)? pickNewImagePath,
     TResult Function(FormatImage? formatImage)? selectCropFormat,
     TResult Function(CroppedFile croppedFile)? addCroppedImage,
     required TResult orElse(),
   }) {
-    if (splitImageInPixeles != null) {
-      return splitImageInPixeles(readAsBytes);
+    if (splitImageInPixelsNew != null) {
+      return splitImageInPixelsNew(readAsBytes);
     }
     return orElse();
   }
@@ -208,8 +218,8 @@ class _$_SplitImageInPixelesQbrixEventc
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SplitImageInPixelesQbrixEventc value)
-        splitImageInPixeles,
+    required TResult Function(_SplitImageInPixelesNewQbrixEventc value)
+        splitImageInPixelsNew,
     required TResult Function(_ClearAllQbrixEvent value) clearAll,
     required TResult Function(_PickNewImagePathQbrixEvent value)
         pickNewImagePath,
@@ -217,48 +227,49 @@ class _$_SplitImageInPixelesQbrixEventc
         selectCropFormat,
     required TResult Function(_AddCroppedImageQbrixEvent value) addCroppedImage,
   }) {
-    return splitImageInPixeles(this);
+    return splitImageInPixelsNew(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult? Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult? Function(_ClearAllQbrixEvent value)? clearAll,
     TResult? Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult? Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
     TResult? Function(_AddCroppedImageQbrixEvent value)? addCroppedImage,
   }) {
-    return splitImageInPixeles?.call(this);
+    return splitImageInPixelsNew?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult Function(_ClearAllQbrixEvent value)? clearAll,
     TResult Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
     TResult Function(_AddCroppedImageQbrixEvent value)? addCroppedImage,
     required TResult orElse(),
   }) {
-    if (splitImageInPixeles != null) {
-      return splitImageInPixeles(this);
+    if (splitImageInPixelsNew != null) {
+      return splitImageInPixelsNew(this);
     }
     return orElse();
   }
 }
 
-abstract class _SplitImageInPixelesQbrixEventc implements QbrixEvent {
-  const factory _SplitImageInPixelesQbrixEventc(
+abstract class _SplitImageInPixelesNewQbrixEventc implements QbrixEvent {
+  const factory _SplitImageInPixelesNewQbrixEventc(
           {required final Future<Uint8List> readAsBytes}) =
-      _$_SplitImageInPixelesQbrixEventc;
+      _$_SplitImageInPixelesNewQbrixEventc;
 
   Future<Uint8List> get readAsBytes;
   @JsonKey(ignore: true)
-  _$$_SplitImageInPixelesQbrixEventcCopyWith<_$_SplitImageInPixelesQbrixEventc>
+  _$$_SplitImageInPixelesNewQbrixEventcCopyWith<
+          _$_SplitImageInPixelesNewQbrixEventc>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -280,12 +291,20 @@ class __$$_ClearAllQbrixEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
+class _$_ClearAllQbrixEvent
+    with DiagnosticableTreeMixin
+    implements _ClearAllQbrixEvent {
   const _$_ClearAllQbrixEvent();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'QbrixEvent.clearAll()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'QbrixEvent.clearAll'));
   }
 
   @override
@@ -301,7 +320,7 @@ class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Future<Uint8List> readAsBytes)
-        splitImageInPixeles,
+        splitImageInPixelsNew,
     required TResult Function() clearAll,
     required TResult Function(String imagePath) pickNewImagePath,
     required TResult Function(FormatImage? formatImage) selectCropFormat,
@@ -313,7 +332,7 @@ class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult? Function()? clearAll,
     TResult? Function(String imagePath)? pickNewImagePath,
     TResult? Function(FormatImage? formatImage)? selectCropFormat,
@@ -325,7 +344,7 @@ class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult Function()? clearAll,
     TResult Function(String imagePath)? pickNewImagePath,
     TResult Function(FormatImage? formatImage)? selectCropFormat,
@@ -341,8 +360,8 @@ class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SplitImageInPixelesQbrixEventc value)
-        splitImageInPixeles,
+    required TResult Function(_SplitImageInPixelesNewQbrixEventc value)
+        splitImageInPixelsNew,
     required TResult Function(_ClearAllQbrixEvent value) clearAll,
     required TResult Function(_PickNewImagePathQbrixEvent value)
         pickNewImagePath,
@@ -356,8 +375,8 @@ class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult? Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult? Function(_ClearAllQbrixEvent value)? clearAll,
     TResult? Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult? Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -369,8 +388,8 @@ class _$_ClearAllQbrixEvent implements _ClearAllQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult Function(_ClearAllQbrixEvent value)? clearAll,
     TResult Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -423,15 +442,25 @@ class __$$_PickNewImagePathQbrixEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
+class _$_PickNewImagePathQbrixEvent
+    with DiagnosticableTreeMixin
+    implements _PickNewImagePathQbrixEvent {
   const _$_PickNewImagePathQbrixEvent({required this.imagePath});
 
   @override
   final String imagePath;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'QbrixEvent.pickNewImagePath(imagePath: $imagePath)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QbrixEvent.pickNewImagePath'))
+      ..add(DiagnosticsProperty('imagePath', imagePath));
   }
 
   @override
@@ -457,7 +486,7 @@ class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Future<Uint8List> readAsBytes)
-        splitImageInPixeles,
+        splitImageInPixelsNew,
     required TResult Function() clearAll,
     required TResult Function(String imagePath) pickNewImagePath,
     required TResult Function(FormatImage? formatImage) selectCropFormat,
@@ -469,7 +498,7 @@ class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult? Function()? clearAll,
     TResult? Function(String imagePath)? pickNewImagePath,
     TResult? Function(FormatImage? formatImage)? selectCropFormat,
@@ -481,7 +510,7 @@ class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult Function()? clearAll,
     TResult Function(String imagePath)? pickNewImagePath,
     TResult Function(FormatImage? formatImage)? selectCropFormat,
@@ -497,8 +526,8 @@ class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SplitImageInPixelesQbrixEventc value)
-        splitImageInPixeles,
+    required TResult Function(_SplitImageInPixelesNewQbrixEventc value)
+        splitImageInPixelsNew,
     required TResult Function(_ClearAllQbrixEvent value) clearAll,
     required TResult Function(_PickNewImagePathQbrixEvent value)
         pickNewImagePath,
@@ -512,8 +541,8 @@ class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult? Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult? Function(_ClearAllQbrixEvent value)? clearAll,
     TResult? Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult? Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -525,8 +554,8 @@ class _$_PickNewImagePathQbrixEvent implements _PickNewImagePathQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult Function(_ClearAllQbrixEvent value)? clearAll,
     TResult Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -585,15 +614,25 @@ class __$$_SelectCropFormatQbrixEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
+class _$_SelectCropFormatQbrixEvent
+    with DiagnosticableTreeMixin
+    implements _SelectCropFormatQbrixEvent {
   const _$_SelectCropFormatQbrixEvent({required this.formatImage});
 
   @override
   final FormatImage? formatImage;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'QbrixEvent.selectCropFormat(formatImage: $formatImage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QbrixEvent.selectCropFormat'))
+      ..add(DiagnosticsProperty('formatImage', formatImage));
   }
 
   @override
@@ -619,7 +658,7 @@ class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Future<Uint8List> readAsBytes)
-        splitImageInPixeles,
+        splitImageInPixelsNew,
     required TResult Function() clearAll,
     required TResult Function(String imagePath) pickNewImagePath,
     required TResult Function(FormatImage? formatImage) selectCropFormat,
@@ -631,7 +670,7 @@ class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult? Function()? clearAll,
     TResult? Function(String imagePath)? pickNewImagePath,
     TResult? Function(FormatImage? formatImage)? selectCropFormat,
@@ -643,7 +682,7 @@ class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult Function()? clearAll,
     TResult Function(String imagePath)? pickNewImagePath,
     TResult Function(FormatImage? formatImage)? selectCropFormat,
@@ -659,8 +698,8 @@ class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SplitImageInPixelesQbrixEventc value)
-        splitImageInPixeles,
+    required TResult Function(_SplitImageInPixelesNewQbrixEventc value)
+        splitImageInPixelsNew,
     required TResult Function(_ClearAllQbrixEvent value) clearAll,
     required TResult Function(_PickNewImagePathQbrixEvent value)
         pickNewImagePath,
@@ -674,8 +713,8 @@ class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult? Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult? Function(_ClearAllQbrixEvent value)? clearAll,
     TResult? Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult? Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -687,8 +726,8 @@ class _$_SelectCropFormatQbrixEvent implements _SelectCropFormatQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult Function(_ClearAllQbrixEvent value)? clearAll,
     TResult Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -748,15 +787,25 @@ class __$$_AddCroppedImageQbrixEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
+class _$_AddCroppedImageQbrixEvent
+    with DiagnosticableTreeMixin
+    implements _AddCroppedImageQbrixEvent {
   const _$_AddCroppedImageQbrixEvent({required this.croppedFile});
 
   @override
   final CroppedFile croppedFile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'QbrixEvent.addCroppedImage(croppedFile: $croppedFile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QbrixEvent.addCroppedImage'))
+      ..add(DiagnosticsProperty('croppedFile', croppedFile));
   }
 
   @override
@@ -782,7 +831,7 @@ class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Future<Uint8List> readAsBytes)
-        splitImageInPixeles,
+        splitImageInPixelsNew,
     required TResult Function() clearAll,
     required TResult Function(String imagePath) pickNewImagePath,
     required TResult Function(FormatImage? formatImage) selectCropFormat,
@@ -794,7 +843,7 @@ class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult? Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult? Function()? clearAll,
     TResult? Function(String imagePath)? pickNewImagePath,
     TResult? Function(FormatImage? formatImage)? selectCropFormat,
@@ -806,7 +855,7 @@ class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixeles,
+    TResult Function(Future<Uint8List> readAsBytes)? splitImageInPixelsNew,
     TResult Function()? clearAll,
     TResult Function(String imagePath)? pickNewImagePath,
     TResult Function(FormatImage? formatImage)? selectCropFormat,
@@ -822,8 +871,8 @@ class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SplitImageInPixelesQbrixEventc value)
-        splitImageInPixeles,
+    required TResult Function(_SplitImageInPixelesNewQbrixEventc value)
+        splitImageInPixelsNew,
     required TResult Function(_ClearAllQbrixEvent value) clearAll,
     required TResult Function(_PickNewImagePathQbrixEvent value)
         pickNewImagePath,
@@ -837,8 +886,8 @@ class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult? Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult? Function(_ClearAllQbrixEvent value)? clearAll,
     TResult? Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult? Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -850,8 +899,8 @@ class _$_AddCroppedImageQbrixEvent implements _AddCroppedImageQbrixEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SplitImageInPixelesQbrixEventc value)?
-        splitImageInPixeles,
+    TResult Function(_SplitImageInPixelesNewQbrixEventc value)?
+        splitImageInPixelsNew,
     TResult Function(_ClearAllQbrixEvent value)? clearAll,
     TResult Function(_PickNewImagePathQbrixEvent value)? pickNewImagePath,
     TResult Function(_SelectCropFormatQbrixEvent value)? selectCropFormat,
@@ -879,10 +928,10 @@ abstract class _AddCroppedImageQbrixEvent implements QbrixEvent {
 mixin _$QbrixState {
   bool get isLoading => throw _privateConstructorUsedError;
   SplitImageModel get splitImageModel => throw _privateConstructorUsedError;
-  Map<int, List<Color>> get mapRowIndexAndListColor =>
-      throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError;
   CroppedFile? get croppedFile => throw _privateConstructorUsedError;
+  Map<int, List<Uint8List>> get indexColumnAndSegmentsImage =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QbrixStateCopyWith<QbrixState> get copyWith =>
@@ -898,9 +947,9 @@ abstract class $QbrixStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       SplitImageModel splitImageModel,
-      Map<int, List<Color>> mapRowIndexAndListColor,
       String? imagePath,
-      CroppedFile? croppedFile});
+      CroppedFile? croppedFile,
+      Map<int, List<Uint8List>> indexColumnAndSegmentsImage});
 
   $SplitImageModelCopyWith<$Res> get splitImageModel;
 }
@@ -920,9 +969,9 @@ class _$QbrixStateCopyWithImpl<$Res, $Val extends QbrixState>
   $Res call({
     Object? isLoading = null,
     Object? splitImageModel = null,
-    Object? mapRowIndexAndListColor = null,
     Object? imagePath = freezed,
     Object? croppedFile = freezed,
+    Object? indexColumnAndSegmentsImage = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -933,10 +982,6 @@ class _$QbrixStateCopyWithImpl<$Res, $Val extends QbrixState>
           ? _value.splitImageModel
           : splitImageModel // ignore: cast_nullable_to_non_nullable
               as SplitImageModel,
-      mapRowIndexAndListColor: null == mapRowIndexAndListColor
-          ? _value.mapRowIndexAndListColor
-          : mapRowIndexAndListColor // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Color>>,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -945,6 +990,10 @@ class _$QbrixStateCopyWithImpl<$Res, $Val extends QbrixState>
           ? _value.croppedFile
           : croppedFile // ignore: cast_nullable_to_non_nullable
               as CroppedFile?,
+      indexColumnAndSegmentsImage: null == indexColumnAndSegmentsImage
+          ? _value.indexColumnAndSegmentsImage
+          : indexColumnAndSegmentsImage // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Uint8List>>,
     ) as $Val);
   }
 
@@ -968,9 +1017,9 @@ abstract class _$$_QbrixStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       SplitImageModel splitImageModel,
-      Map<int, List<Color>> mapRowIndexAndListColor,
       String? imagePath,
-      CroppedFile? croppedFile});
+      CroppedFile? croppedFile,
+      Map<int, List<Uint8List>> indexColumnAndSegmentsImage});
 
   @override
   $SplitImageModelCopyWith<$Res> get splitImageModel;
@@ -989,9 +1038,9 @@ class __$$_QbrixStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? splitImageModel = null,
-    Object? mapRowIndexAndListColor = null,
     Object? imagePath = freezed,
     Object? croppedFile = freezed,
+    Object? indexColumnAndSegmentsImage = null,
   }) {
     return _then(_$_QbrixState(
       isLoading: null == isLoading
@@ -1002,10 +1051,6 @@ class __$$_QbrixStateCopyWithImpl<$Res>
           ? _value.splitImageModel
           : splitImageModel // ignore: cast_nullable_to_non_nullable
               as SplitImageModel,
-      mapRowIndexAndListColor: null == mapRowIndexAndListColor
-          ? _value._mapRowIndexAndListColor
-          : mapRowIndexAndListColor // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Color>>,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -1014,20 +1059,24 @@ class __$$_QbrixStateCopyWithImpl<$Res>
           ? _value.croppedFile
           : croppedFile // ignore: cast_nullable_to_non_nullable
               as CroppedFile?,
+      indexColumnAndSegmentsImage: null == indexColumnAndSegmentsImage
+          ? _value._indexColumnAndSegmentsImage
+          : indexColumnAndSegmentsImage // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Uint8List>>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_QbrixState implements _QbrixState {
+class _$_QbrixState with DiagnosticableTreeMixin implements _QbrixState {
   const _$_QbrixState(
       {this.isLoading = true,
       this.splitImageModel = const SplitImageModel(),
-      final Map<int, List<Color>> mapRowIndexAndListColor = const {},
       this.imagePath,
-      this.croppedFile})
-      : _mapRowIndexAndListColor = mapRowIndexAndListColor;
+      this.croppedFile,
+      final Map<int, List<Uint8List>> indexColumnAndSegmentsImage = const {}})
+      : _indexColumnAndSegmentsImage = indexColumnAndSegmentsImage;
 
   @override
   @JsonKey()
@@ -1035,24 +1084,36 @@ class _$_QbrixState implements _QbrixState {
   @override
   @JsonKey()
   final SplitImageModel splitImageModel;
-  final Map<int, List<Color>> _mapRowIndexAndListColor;
-  @override
-  @JsonKey()
-  Map<int, List<Color>> get mapRowIndexAndListColor {
-    if (_mapRowIndexAndListColor is EqualUnmodifiableMapView)
-      return _mapRowIndexAndListColor;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_mapRowIndexAndListColor);
-  }
-
   @override
   final String? imagePath;
   @override
   final CroppedFile? croppedFile;
+  final Map<int, List<Uint8List>> _indexColumnAndSegmentsImage;
+  @override
+  @JsonKey()
+  Map<int, List<Uint8List>> get indexColumnAndSegmentsImage {
+    if (_indexColumnAndSegmentsImage is EqualUnmodifiableMapView)
+      return _indexColumnAndSegmentsImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_indexColumnAndSegmentsImage);
+  }
 
   @override
-  String toString() {
-    return 'QbrixState(isLoading: $isLoading, splitImageModel: $splitImageModel, mapRowIndexAndListColor: $mapRowIndexAndListColor, imagePath: $imagePath, croppedFile: $croppedFile)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'QbrixState(isLoading: $isLoading, splitImageModel: $splitImageModel, imagePath: $imagePath, croppedFile: $croppedFile, indexColumnAndSegmentsImage: $indexColumnAndSegmentsImage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QbrixState'))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('splitImageModel', splitImageModel))
+      ..add(DiagnosticsProperty('imagePath', imagePath))
+      ..add(DiagnosticsProperty('croppedFile', croppedFile))
+      ..add(DiagnosticsProperty(
+          'indexColumnAndSegmentsImage', indexColumnAndSegmentsImage));
   }
 
   @override
@@ -1064,12 +1125,13 @@ class _$_QbrixState implements _QbrixState {
                 other.isLoading == isLoading) &&
             (identical(other.splitImageModel, splitImageModel) ||
                 other.splitImageModel == splitImageModel) &&
-            const DeepCollectionEquality().equals(
-                other._mapRowIndexAndListColor, _mapRowIndexAndListColor) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             (identical(other.croppedFile, croppedFile) ||
-                other.croppedFile == croppedFile));
+                other.croppedFile == croppedFile) &&
+            const DeepCollectionEquality().equals(
+                other._indexColumnAndSegmentsImage,
+                _indexColumnAndSegmentsImage));
   }
 
   @override
@@ -1077,9 +1139,9 @@ class _$_QbrixState implements _QbrixState {
       runtimeType,
       isLoading,
       splitImageModel,
-      const DeepCollectionEquality().hash(_mapRowIndexAndListColor),
       imagePath,
-      croppedFile);
+      croppedFile,
+      const DeepCollectionEquality().hash(_indexColumnAndSegmentsImage));
 
   @JsonKey(ignore: true)
   @override
@@ -1090,22 +1152,23 @@ class _$_QbrixState implements _QbrixState {
 
 abstract class _QbrixState implements QbrixState {
   const factory _QbrixState(
-      {final bool isLoading,
-      final SplitImageModel splitImageModel,
-      final Map<int, List<Color>> mapRowIndexAndListColor,
-      final String? imagePath,
-      final CroppedFile? croppedFile}) = _$_QbrixState;
+          {final bool isLoading,
+          final SplitImageModel splitImageModel,
+          final String? imagePath,
+          final CroppedFile? croppedFile,
+          final Map<int, List<Uint8List>> indexColumnAndSegmentsImage}) =
+      _$_QbrixState;
 
   @override
   bool get isLoading;
   @override
   SplitImageModel get splitImageModel;
   @override
-  Map<int, List<Color>> get mapRowIndexAndListColor;
-  @override
   String? get imagePath;
   @override
   CroppedFile? get croppedFile;
+  @override
+  Map<int, List<Uint8List>> get indexColumnAndSegmentsImage;
   @override
   @JsonKey(ignore: true)
   _$$_QbrixStateCopyWith<_$_QbrixState> get copyWith =>
