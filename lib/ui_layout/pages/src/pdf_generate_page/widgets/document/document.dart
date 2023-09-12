@@ -7,8 +7,6 @@ import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:models/models.dart';
 
-import 'components/wrapper_segment.dart';
-
 Future<Uint8List> generateDocument(
   PdfPageFormat format,
   SplitImageModel data,
@@ -16,11 +14,10 @@ Future<Uint8List> generateDocument(
   final doc = Document(pageMode: PdfPageMode.outlines);
   final font1 = await PdfGoogleFonts.openSansRegular();
   final font2 = await PdfGoogleFonts.openSansBold();
-  final shape = await rootBundle.loadString('assets/generate-pdf/document.svg');
-  final swirls = await rootBundle.loadString('assets/generate-pdf/swirls2.svg');
 
   format =
-      data.formatImage == FormatImage.a4 ? PdfPageFormat.a4 : PdfPageFormat.a3;
+      /*    data.formatImage == FormatImage.a4 ?*/
+      PdfPageFormat.a4; /*: PdfPageFormat.a3;*/
 
   doc.addPage(
     Page(
@@ -39,6 +36,31 @@ Future<Uint8List> generateDocument(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Инструкция от QBRIX', textScaleFactor: 2),
+                Row(
+                  children: colors
+                      .map(
+                        (e) => Padding(
+                          padding: EdgeInsets.only(right: 4),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                e.name,
+                                style: const TextStyle(
+                                  fontSize: 4,
+                                ),
+                              ),
+                              Container(
+                                width: 14,
+                                height: 14,
+                                color: PdfColor.fromInt(e.colorInt),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
                 PdfLogo()
               ],
             ),
@@ -59,7 +81,10 @@ Future<Uint8List> generateDocument(
                         width: data.sizePixel!.width,
                         height: data.sizePixel!.height,
                         color: PdfColor.fromInt(
-                          data.mapRowIndexAndListColor[indexRow]![indexColumn],
+                          _getColor(data.mapRowIndexAndListColor[indexRow]![
+                                  indexColumn])
+                              .colorInt,
+                          // data.mapRowIndexAndListColor[indexRow]![indexColumn],
                         ),
                       );
                     },
@@ -83,7 +108,7 @@ Future<Uint8List> generateDocument(
     allSegmentsinPexels.addAll(segment);
   }
 
-  double _sizePixel = format.width / 3 / data.kSegmentsWidth;
+  double _sizePixel = format.width / 3 / data.kSegmentsWidth + 5;
 
   doc.addPage(
     MultiPage(
@@ -170,7 +195,9 @@ Future<Uint8List> generateDocument(
           width: format.width,
           child: GridView(
             crossAxisCount: 3,
-            childAspectRatio: (data.kSegmentsWidth) / data.kSegmentsHeight,
+            childAspectRatio: data.formatImage == FormatImage.a3
+                ? 0.5
+                : (data.kSegmentsWidth) / data.kSegmentsHeight,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             padding: EdgeInsets.zero,
@@ -197,11 +224,14 @@ Future<Uint8List> generateDocument(
                         itemBuilder: (context, indexRowSegment) {
                           final List<int> colorPixels =
                               segment[indexRowSegment] ?? [];
+
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             direction: Axis.horizontal,
                             itemCount: colorPixels.length,
                             itemBuilder: (context, indexPixel) {
+                              final NameColor _color =
+                                  _getColor(colorPixels[indexPixel]);
                               return Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -222,13 +252,31 @@ Future<Uint8List> generateDocument(
                                           (indexPixel + 1).toString(),
                                           style: const TextStyle(fontSize: 4),
                                         ),
-                                      Container(
-                                        width: data.sizePixel!.width,
-                                        height: data.sizePixel!.height,
-                                        color: PdfColor.fromInt(
-                                          colorPixels[indexPixel],
-                                        ),
-                                      ),
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            width: data.sizePixel!.width,
+                                            height: data.sizePixel!.height,
+                                            color: PdfColor.fromInt(
+                                                _color.colorInt),
+                                          ),
+                                          Text(
+                                            _color.name,
+                                            style: TextStyle(
+                                              fontSize: 4,
+                                              color: _color.colorInt ==
+                                                          colors
+                                                              .first.colorInt ||
+                                                      _color.colorInt ==
+                                                          colors[1].colorInt
+                                                  ? PdfColor.fromInt(material
+                                                      .Colors.black.value)
+                                                  : PdfColor.fromInt(material
+                                                      .Colors.white.value),
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   ),
                                 ],
@@ -244,94 +292,43 @@ Future<Uint8List> generateDocument(
             }).toList(),
           ),
         ),
-
-        ///image segments
-        // Text(
-        //     '______________________________________________________________________'
-        //     '______________________________________________________________________'
-        //     '______________________________________________________________________'
-        //     ''),
-        // SizedBox(
-        //   width: format.width,
-        //   child: GridView(
-        //     crossAxisCount: 3,
-        //     childAspectRatio: 1,
-        //     crossAxisSpacing: 10,
-        //     mainAxisSpacing: 10,
-        //     padding: const EdgeInsets.all(10),
-        //     children: allSegments.map((segment) {
-        //       return WrapperSegment(
-        //         child: SizedBox(
-        //           width: _sizePixel * data.kSegmentsWidth,
-        //           height: _sizePixel * data.kSegmentsHeight,
-        //           child: Image(
-        //             MemoryImage(segment),
-        //             fit: BoxFit.contain,
-        //           ),
-        //         ),
-        //         indexSegment: allSegments.indexOf(segment),
-        //         formatImage: data.formatImage ?? FormatImage.a4,
-        //         kSegmentsWidth: data.kSegmentsWidth,
-        //         kSegmentsHeight: data.kSegmentsHeight,
-        //       );
-        //     }).toList(),
-        //   ),
-        // ),
-        ///
-        // SizedBox(
-        //   width: format.width,
-        //   child: GridView(
-        //
-        //     crossAxisCount: 3,
-        //     childAspectRatio: 0.5,
-        //     children:
-        //         data.indexColumnAndSegmentsImage.keys.map((int indexColumn) {
-        //       List<Uint8List> listSegments =
-        //           data.indexColumnAndSegmentsImage[indexColumn]!;
-        //       return ListView.builder(
-        //         direction: Axis.horizontal,
-        //         itemCount: listSegments.length,
-        //         itemBuilder: (context, indexSegment) {
-        //           final Uint8List imageSegment = listSegments[indexSegment];
-        //
-        //           return Image(
-        //             MemoryImage(imageSegment),
-        //             width: format.width / data.kSegmentsWidth,
-        //             height: format.height / data.kSegmentsHeight,
-        //           );
-        //         },
-        //       );
-        //     }).toList(),
-        //   ),
-        // ),
-
-        // SizedBox(
-        //   width: format.width,
-        //   child: ListView.builder(
-        //     direction: Axis.vertical,
-        //     itemBuilder: (context, indexColumn) {
-        //       List<Uint8List> listSegments =
-        //       data.indexColumnAndSegmentsImage[indexColumn]!;
-        //       return ListView.builder(
-        //         direction: Axis.horizontal,
-        //         itemCount: listSegments.length,
-        //         itemBuilder: (context, indexSegment) {
-        //           final Uint8List imageSegment = listSegments[indexSegment];
-        //
-        //           return Image(
-        //             MemoryImage(imageSegment),
-        //             width: format.width / data.kSegmentsWidth,
-        //             height: format.height / data.kSegmentsHeight,
-        //           );
-        //         },
-        //       );
-        //     },
-        //     itemCount: data.indexColumnAndSegmentsImage.keys.length,
-        //   ),
-        // ),
       ],
     ),
   );
 
   return await doc.save();
+}
+
+class NameColor {
+  NameColor({
+    required this.name,
+    required this.colorInt,
+  });
+
+  final String name;
+  final int colorInt;
+}
+
+List<NameColor> colors = [
+  NameColor(name: 'A1', colorInt: 0xFFbebebe),
+  NameColor(name: 'A2', colorInt: 0xFF7a7c7d),
+  NameColor(name: 'A3', colorInt: 0xFF535554),
+  NameColor(name: 'A4', colorInt: 0xFF383a3e),
+];
+
+NameColor _getColor(int colorInt) {
+  int minDiff = colorInt;
+  NameColor closestColor = colors.first;
+  for (int color in colors.map((e) => e.colorInt).toList()) {
+    int redDiff = ((colorInt >> 16) & 0xFF) - ((color >> 16) & 0xFF);
+    int greenDiff = ((colorInt >> 8) & 0xFF) - ((color >> 8) & 0xFF);
+    int blueDiff = (colorInt & 0xFF) - (color & 0xFF);
+    int diff = redDiff.abs() + greenDiff.abs() + blueDiff.abs();
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestColor = colors.firstWhere((element) => element.colorInt == color);
+    }
+  }
+  print("Ближайший цвет: ${closestColor}");
+  return closestColor;
 }

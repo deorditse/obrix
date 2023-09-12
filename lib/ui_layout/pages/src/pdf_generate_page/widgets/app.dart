@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
         canChangePageFormat: false,
         canDebug: false,
         shouldRepaint: true,
+        padding: EdgeInsets.zero,
         maxPageWidth: 700,
         build: (format) => generateDocument(
           format,

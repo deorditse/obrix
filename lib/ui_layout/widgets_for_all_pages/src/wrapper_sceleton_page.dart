@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:obrix/ui_layout/widgets_for_all_pages/src/styles/src/styles/color_styles.dart';
 import 'package:obrix/ui_layout/widgets_for_all_pages/src/styles/src/styles/text_style.dart';
 
@@ -18,13 +19,21 @@ class WrapperSceletonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      appBar: AppBar(
-        title: Text(
-          "QBRIX",
-          style: myTextStyleFontOswald(
-            fontSize: 24,
-            context: context,
-          ),
+      appBar: PreferredSize(
+        preferredSize: const Size(double.maxFinite, kToolbarHeight),
+        child: BlocBuilder<QbrixBloc, QbrixState>(
+          builder: (context, state) {
+            final String? nameFormat = state.splitImageModel.formatImage?.name;
+            return AppBar(
+              title: Text(
+                "QBRIX ${nameFormat != null ? ' | ${nameFormat.toUpperCase()}' : ''}",
+                style: myTextStyleFontOswald(
+                  fontSize: 24,
+                  context: context,
+                ),
+              ),
+            );
+          },
         ),
       ),
       body: SafeArea(

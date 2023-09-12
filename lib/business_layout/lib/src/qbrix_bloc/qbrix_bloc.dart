@@ -75,8 +75,7 @@ class QbrixBloc extends Bloc<QbrixEvent, QbrixState> {
           // для нижних сегментов countPixelsInSegmentColumn = 10;
           _sizePixel = material.Size(
             (image.width).toInt() / (kSegmentsWidth * countSegmentsInRow),
-            (image.height).toInt() /
-                (kSegmentsHeight * (countSegmentsInColumn - 3)),
+            (image.height).toInt() / (kSegmentsHeight * countSegmentsInColumn),
           );
       }
 

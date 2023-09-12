@@ -21,7 +21,7 @@ class CropImage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Flexible(
+          Expanded(
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -75,8 +75,7 @@ class CropImage extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 32.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(PdfGeneratePage.id);
+                          Navigator.of(context).pushNamed(PdfGeneratePage.id);
                         },
                         child: const Row(
                           children: [
@@ -116,25 +115,19 @@ class CropImage extends StatelessWidget {
       viewPort: CroppieViewPort(
         width: sizeViewPort.width.round(),
         height: sizeViewPort.height.round(),
-        // isMobile
-        //     ? ((screenWidth * 0.85)).round()
-        //     : ((screenHeight * 0.65) * 1.414141).round(),
-        // height: isMobile
-        //     ? (screenWidth * 0.85 * 1.414141).round()
-        //     : (screenHeight * 0.65).round(),
       ),
-      enableExif: true,
-      enableOrientation: true,
+      // enableOrientation: true,
       enableZoom: true,
-      enforceBoundary: true,
+      enableResize: false,
       mouseWheelZoom: true,
       showZoomer: true,
+      barrierColor: Theme.of(context).primaryColor,
     );
 
     await ImageCropper().cropImage(
       sourcePath: imagePath,
       compressFormat: ImageCompressFormat.jpg,
-      compressQuality: 300,
+      compressQuality: 90,
       uiSettings: [settings],
     ).then(
       (CroppedFile? croppedFile) {
@@ -162,7 +155,7 @@ Size getSizeViewPort(
 
   double maxWidth = MediaQuery.of(context).size.width - (isDesktop ? 0 : 10);
 
-  double kHeight = isDesktop ? maxHeight : maxWidth * dWToH;
+  double kHeight = isDesktop ? maxHeight : maxWidth / dWToH;
   double kWidth = isDesktop ? maxHeight * dWToH : maxWidth;
 
   double height = kHeight;
