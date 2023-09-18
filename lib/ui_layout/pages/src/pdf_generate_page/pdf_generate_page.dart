@@ -9,6 +9,26 @@ import 'package:obrix/ui_layout/widgets_for_all_pages/widgets_for_all_pages.dart
 
 import 'widgets/app.dart';
 
+class NameColor {
+  NameColor({
+    required this.name,
+    required this.colorInt,
+    required this.imageData,
+  });
+
+  final String name;
+  final int colorInt;
+  List<int> imageData;
+}
+
+List<NameColor> pixelData = [
+  NameColor(name: 'I', colorInt: 0xFF9dc2e4, imageData: []),
+  NameColor(name: 'L', colorInt: 0xFFa0a7b1, imageData: []),
+  NameColor(name: 'A', colorInt: 0xFF80858b, imageData: []),
+  NameColor(name: 'E', colorInt: 0xFF697375, imageData: []),
+  NameColor(name: 'W', colorInt: 0xFF262d37, imageData: []),
+];
+
 class PdfGeneratePage extends StatelessWidget {
   static const String id = '/pdf_generate_page';
 
@@ -16,18 +36,39 @@ class PdfGeneratePage extends StatelessWidget {
 
   void splitImageCreate(BuildContext context,
       {required Future<Uint8List> readAsBytes}) {
-    Future.delayed(const Duration(milliseconds: 300), () {
-      BlocProvider.of<QbrixBloc>(context).add(
-        QbrixEvent.splitImageInPixelsNew(readAsBytes: readAsBytes),
+    Future.delayed(
+      const Duration(milliseconds: 300),
+      () {
+        BlocProvider.of<QbrixBloc>(context)
+            .add(QbrixEvent.splitImageInPixelsNew(readAsBytes: readAsBytes));
+      },
+    );
+  }
+
+  Future<List<NameColor>> generateList() async {
+    List<NameColor> _list = [];
+    for (var pixel in pixelData) {
+      int index = pixelData.indexOf(pixel);
+      final _res = await rootBundle.load('assets/puzzle/${pixel.name}.png');
+      _list.add(
+        NameColor(
+          name: pixelData[index].name,
+          colorInt: pixelData[index].colorInt,
+          imageData: _res.buffer.asUint8List(),
+        ),
       );
-    });
+    }
+
+    return _list;
   }
 
   @override
   Widget build(BuildContext context) {
     return WrapperSceletonPage(
+      isPadding: false,
       child: Center(
-        child: BlocBuilder<QbrixBloc, QbrixState>(
+        child: BlocConsumer<QbrixBloc, QbrixState>(
+          listener: (context, state) {},
           builder: (context, state) {
             if (state.croppedFile != null &&
                 state.splitImageModel.mapRowIndexAndListColor.isEmpty) {
@@ -38,6 +79,9 @@ class PdfGeneratePage extends StatelessWidget {
                 readAsBytes: state.croppedFile!.readAsBytes(),
               );
             }
+            if (state.croppedFile == null && state.isLoading) {
+              Navigator.pop(context);
+            }
             if (state.isLoading) {
               return const Center(
                 child: AnimatedIconDeveloper(
@@ -46,8 +90,20 @@ class PdfGeneratePage extends StatelessWidget {
               );
             } else {
               return state.splitImageModel.mapRowIndexAndListColor.isNotEmpty
-                  ? MyApp(splitImageModel: state.splitImageModel)
-                  : const Text("Ошибка...");
+                  ? FutureBuilder<List<NameColor>>(
+                      future: generateList(),
+                      builder: (context, data) {
+                        if (data.hasData) {
+                          return MyApp(
+                            splitImageModel: state.splitImageModel,
+                            pixelData: data.data!,
+                          );
+                        } else {
+                          return const MyCircularProgressIndicator();
+                        }
+                      },
+                    )
+                  : const Text("Ошибка...Попробуйте позже");
             }
           },
         ),

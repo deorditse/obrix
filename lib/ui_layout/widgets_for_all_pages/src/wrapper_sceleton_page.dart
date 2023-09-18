@@ -11,8 +11,10 @@ class WrapperSceletonPage extends StatelessWidget {
     Key? key,
     required this.child,
     this.resizeToAvoidBottomInset = true,
+    this.isPadding = true,
   }) : super(key: key);
   final Widget child;
+  final bool isPadding;
   final bool resizeToAvoidBottomInset;
 
   @override
@@ -43,10 +45,12 @@ class WrapperSceletonPage extends StatelessWidget {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 12,
-            ),
+            padding: isPadding
+                ? const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 12,
+                  )
+                : EdgeInsets.zero,
             child: child,
           ),
         ),

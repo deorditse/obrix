@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:obrix/ui_layout/pages/pages.dart';
 import 'package:obrix/ui_layout/widgets_for_all_pages/widgets_for_all_pages.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -10,14 +11,17 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:models/models.dart';
 import 'document/document.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class MyApp extends StatelessWidget {
   const MyApp({
     Key? key,
     required this.splitImageModel,
+    required this.pixelData,
   }) : super(key: key);
 
   final SplitImageModel splitImageModel;
+  final List<NameColor> pixelData;
 
   void _showPrintedToast(BuildContext context) {
     myBottomSnackBar(context, content: 'Печать инструкции');
@@ -65,6 +69,7 @@ class MyApp extends StatelessWidget {
         build: (format) => generateDocument(
           format,
           splitImageModel,
+          pixelData,
         ),
         actions: actions,
         onPrinted: _showPrintedToast,

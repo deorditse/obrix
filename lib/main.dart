@@ -10,7 +10,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:business_layout/business_layout.dart';
 
-//flutter build web --web-renderer canvaskit
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -35,8 +34,8 @@ class MarketplaceApp extends StatelessWidget {
         theme: themeLight(context),
         initialRoute: HomePage.id,
         routes: {
-          HomePage.id: (context) => const HomePage(),
-          PdfGeneratePage.id: (context) => const PdfGeneratePage(),
+          HomePage.id: (_) => const HomePage(),
+          PdfGeneratePage.id: (_) => const PdfGeneratePage(),
         },
       ),
     );

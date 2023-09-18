@@ -57,6 +57,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/generate-pdf/
+    - assets/puzzle/
 
 
   uses-material-design: true
@@ -159,7 +160,7 @@ flutter_native_splash:
     # fill_vertical, left, right, start, or top.
     #android_gravity: center
     #
-    # ios_content_mode can be one of the following iOS UIView.ContentMode (see
+  # ios_content_mode can be one of the following iOS UIView.ContentMode (see
   # https://developer.apple.com/documentation/uikit/uiview/contentmode): scaleToFill,
   # scaleAspectFit, scaleAspectFill, center, top, bottom, left, right, topLeft, topRight,
   # bottomLeft, or bottomRight.
